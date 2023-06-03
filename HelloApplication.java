@@ -269,7 +269,7 @@ class HoldNote extends Quadrilateral implements Note {
         return 1;
     }
 
-    public int checkHit(List<double> points){
+    public int checkHit(List<Double> points){
         for (double point : points){
             if(point <= midpoint + width / 2 && point >= midpoint - width / 2){
                 isHit = true;
@@ -301,24 +301,18 @@ class SlideNote implements Note{
             block.reduceTime(time);
         }
     }
-    public int getTimeStart();
-    public int getTimeEnd();
-    public int judge(double point){
-        if (!(point <= midpoint + width / 2 && point >= midpoint - width / 2)){
-            return -1;
+    public int getTimeStart(){
+        return time;
+    }
+    public int getTimeEnd(){
+        return blocks.get(blocks.toArray().length - 1).time + (int) blocks.get(blocks.toArray().length - 1).length;
+    }
+    public int judge(List<Double> points){
+        if (blocks.get(0).time == 0 && blocks.get(0).length == 0){
+            blocks.remove(0);
         }
-        if (abs(time) > 80){
-            return -1;
-        }
-        for (Quadrilateral block : blocks){
-            block.setColor(Color.BLACK);
-        }
-        isHit = true;
-        if (abs(time) < 40){
-            return 0;
-        }
-        return 1;
-    };
+        return blocks.get(0).checkHeld(points);
+    }
 }
 
 class SlideSegment extends Quadrilateral{
@@ -356,7 +350,7 @@ class SlideSegment extends Quadrilateral{
             prevLength = length;
         }
     }
-    public int checkHeld(List<double> points){
+    public int checkHeld(List<Double> points){
         double midpoint = midpointBottom + length / prevLength * (midpointTop - midpointBottom);
 
         for (double point : points){
