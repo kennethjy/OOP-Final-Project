@@ -54,12 +54,12 @@ public class HelloApplication extends Application {
 
         Media song = new Media(new File("RushE.mp3").toURI().toString());
         player = new MediaPlayer(song);
-        player.setAutoPlay(true);
         AnimationTimer animationTimer = new AnimationTimer() {
             long prevTime = System.currentTimeMillis();
 
             @Override
             public void handle(long currentTime) {
+                player.setAutoPlay(true);
                 long deltaTime = System.currentTimeMillis() - prevTime;
                 prevTime = System.currentTimeMillis();
                 List<Input> list = new ArrayList<>();
@@ -143,18 +143,18 @@ public class HelloApplication extends Application {
                 }
                 case "slide" -> {
                     time = (int) round((60000 * time / bpm) + offset);
-                    int t2 = Integer.parseInt(parts[3]);
+                    double t2 = Double.parseDouble(parts[3]);
                     t2 = (int) round((60000 * t2 / bpm) + offset);
                     double m2 = Double.parseDouble(parts[4]);
                     if (parts.length >= 7) {
-                        int t3 = Integer.parseInt(parts[5]);
+                        double t3 = Double.parseDouble(parts[5]);
                         t3 = (int) round((60000 * t3 / bpm) + offset);
                         double m3 = Double.parseDouble(parts[6]);
-                        SlideNote note = new SlideNote((int) time, t2, t3, lane, m2, m3, 0.9, 900, 900, pane);
+                        SlideNote note = new SlideNote((int) time, (int) t2, (int) t3, lane, m2, m3, 0.9, 900, 900, pane);
                         tapNotes.add(note);
                         longs.add(note);
                     } else {
-                        SlideNote note = new SlideNote((int) time, t2, lane, m2, 0.9, 900, 900, pane);
+                        SlideNote note = new SlideNote((int) time, (int) t2, lane, m2, 0.9, 900, 900, pane);
                         tapNotes.add(note);
                         longs.add(note);
                     }
@@ -269,11 +269,11 @@ class TapNote extends Quadrilateral implements Note{
         }
         for (Input input : points) {
             double point = input.point;
-            if (point <= midpoint + width / 2 + 0.3 && point >= midpoint - width / 2 - 0.3) {
-                if (abs(time) <= 80) {
+            if (point <= midpoint + width / 2 + 0.6 && point >= midpoint - width / 2 - 0.6) {
+                if (abs(time) <= 120) {
                     isHit = true;
                     pointHit = point;
-                    if (abs(time) < 40) {
+                    if (abs(time) < 60) {
                         super.setColor(Color.rgb(255, 255, 0, 0.3));
                         time = 20;
                         return 0;
@@ -350,11 +350,11 @@ class FlickNote extends Triangle implements Note{
             double point = input.point;
             double height = input.height;
             if (hit) {
-                if (point <= midpoint + width / 2 + 0.8 && point >= midpoint - width / 2 - 0.8 && height > this.height) {
-                    if (abs(time) <= 120) {
+                if (point <= midpoint + width / 2 + 0.9 && point >= midpoint - width / 2 - 0.9 && height > this.height) {
+                    if (abs(time) <= 200) {
                         isHit = true;
                         super.toQuad();
-                        if (abs(time) < 60) {
+                        if (abs(time) < 100) {
                             super.setColor(Color.rgb(255, 255, 0, 0.3));
                             time = 20;
                             return 0;
@@ -364,8 +364,8 @@ class FlickNote extends Triangle implements Note{
                         return 1;
                     }
                 }
-            } else if (point <= midpoint + width / 2 + 0.3 && point >= midpoint - width / 2 - 0.3) {
-                if (abs(time) <= 80) {
+            } else if (point <= midpoint + width / 2 + 0.6 && point >= midpoint - width / 2 - 0.6) {
+                if (abs(time) <= 120) {
                     hit = true;
                     this.height = height;
                     pointHit = point;
@@ -438,12 +438,12 @@ class HoldNote extends Quadrilateral implements Note, longNote {
         for (Input input : points){
             double point = input.point;
             if (!isHit) {
-                if (point <= midpoint + width / 2 + 0.3 && point >= midpoint - width / 2 - 0.3) {
-                    if (abs(time) <= 80) {
+                if (point <= midpoint + width / 2 + 0.6 && point >= midpoint - width / 2 - 0.6) {
+                    if (abs(time) <= 120) {
                         super.setColor(Color.BLACK);
                         isHit = true;
                         pointHit = point;
-                        if (abs(time) < 40) {
+                        if (abs(time) < 60) {
                             return 0;
                         }
                         return 1;
@@ -462,17 +462,20 @@ class HoldNote extends Quadrilateral implements Note, longNote {
     public int checkHeld(List<Input> points){
         for (Input input : points){
             double point = input.point;
-            if(point <= midpoint + width / 2 + 0.3 && point >= midpoint - width / 2 - 0.3 && isHit){
+            if(point <= midpoint + width / 2 + 0.5 && point >= midpoint - width / 2 - 0.5 && isHit){
                 setColor(Color.BLACK);
                 isHeld = true;
                 if(oriLength % 100 == 0) {
-                    return 1;
+                    return 2;
                 }
                 return 0;
             }
         }
         isHeld = false;
         setColor(Color.GRAY);
+        if(oriLength % 100 == 0){
+            return -1;
+        }
         return 0;
     }
 }
