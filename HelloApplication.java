@@ -10,15 +10,17 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.List;
 
 import static java.lang.Math.*;
 
 public class HelloApplication extends Application {
-    private static final int NOTE_DURATION = 100; // Duration of each note in milliseconds
     private Map<String, Input> keyInputs;
     private final List<String> keydownKeys = new ArrayList<>();
     private final List<String> keyDownThisFrame = new ArrayList<>();
@@ -26,6 +28,7 @@ public class HelloApplication extends Application {
     protected double offset;
     protected double bpm;
     MediaPlayer player;
+    ImageView iView;
 
     public static void main(String[] args) {
         launch(args);
@@ -44,6 +47,9 @@ public class HelloApplication extends Application {
         Rectangle line = new Rectangle(0, 950, 1000, 10);
         line.setFill(Color.BLACK);
         container.getChildren().add(line);
+
+        iView = new ImageView(new Image("C:\\Users\\user\\IdeaProjects\\demo\\E.png"));
+        iView.setFitHeight(1000);
 
         Scene scene = new Scene(container, 1000, 1000);
         scene.setOnKeyPressed(event -> handleKeyPress(event.getCode().toString()));
@@ -78,20 +84,27 @@ public class HelloApplication extends Application {
                 for (int i = 0; i < Notes.toArray().length; i++) {
                     Note note = Notes.get(i);
                     note.reduceTime(deltaTime);
+                    if (note.getTimeStart() <= -50 && note.getClass().getName().equals("com.example.demo.E") && !container.getChildren().contains(iView)){
+                        container.getChildren().add(iView);
+                    }
                     if (note.getTimeStart() < 80){
-                        if(note.judge(list) > 0){
+                        if(note.judge(list, container) > 0){
                             list.remove(note.getPointHit());
+                            if (note.getClass().getName().equals("com.example.demo.E") && !container.getChildren().contains(iView)){
+                                container.getChildren().add(iView);
+                            }
                         }
                     }
                     if (note.getTimeEnd() < -100){
                         Notes.remove(note);
                         longs.remove(note);
                         i++;
+                        container.getChildren().remove(note);
                     }
                 }
                 for (int i = 0; i < longs.toArray().length; i++){
                     longNote note = longs.get(i);
-                    note.checkHeld(kDownList);
+                    note.checkHeld(kDownList, container);
                 }
                 keyDownThisFrame.clear();
             }
@@ -122,9 +135,16 @@ public class HelloApplication extends Application {
                 }
                 case "tap" -> {
                     time = (int) round((60000 * time / this.bpm) + this.offset);
-                    TapNote note = new TapNote((int) time, lane, 0.9, 900, 900);
-                    tapNotes.add(note);
-                    pane.getChildren().add(note.getBlock());
+                    if (parts.length == 4){
+                        E note = new E((int) time, lane, 0.9, 900, 900);
+                        tapNotes.add(note);
+                        pane.getChildren().add(note.getBlock());
+                    } else {
+                        TapNote note = new TapNote((int) time, lane, 0.9, 900, 900);
+                        tapNotes.add(note);
+                        pane.getChildren().add(note.getBlock());
+                    }
+
                 }
                 case "flick" -> {
                     time = (int) round((60000 * time / bpm) + offset);
@@ -146,15 +166,22 @@ public class HelloApplication extends Application {
                     double t2 = Double.parseDouble(parts[3]);
                     t2 = (int) round((60000 * t2 / bpm) + offset);
                     double m2 = Double.parseDouble(parts[4]);
+                    double width = 0.9;
                     if (parts.length >= 7) {
+                        if ( parts.length == 8 ) {
+                            width = Double.parseDouble(parts[7]);
+                        }
                         double t3 = Double.parseDouble(parts[5]);
                         t3 = (int) round((60000 * t3 / bpm) + offset);
                         double m3 = Double.parseDouble(parts[6]);
-                        SlideNote note = new SlideNote((int) time, (int) t2, (int) t3, lane, m2, m3, 0.9, 900, 900, pane);
+                        SlideNote note = new SlideNote((int) time, (int) t2, (int) t3, lane, m2, m3, width, 900, 900, pane);
                         tapNotes.add(note);
                         longs.add(note);
                     } else {
-                        SlideNote note = new SlideNote((int) time, (int) t2, lane, m2, 0.9, 900, 900, pane);
+                        if ( parts.length == 6 ) {
+                            width = Double.parseDouble(parts[5]);
+                        }
+                        SlideNote note = new SlideNote((int) time, (int) t2, lane, m2, width, 900, 900, pane);
                         tapNotes.add(note);
                         longs.add(note);
                     }
@@ -262,7 +289,7 @@ class TapNote extends Quadrilateral implements Note{
     public double getTimeEnd() {
         return time;
     }
-    public int judge(List<Input> points){
+    public int judge(List<Input> points, Pane pane){
 
         if (isHit){
             return -2;
@@ -289,8 +316,14 @@ class TapNote extends Quadrilateral implements Note{
     public double getPointHit(){
         return pointHit;
     }
+
 }
 
+class E extends TapNote{
+    public E(int time, double midpoint, double width, int sWidth, int sHeight) {
+        super(time, midpoint, width, sWidth, sHeight);
+    }
+}
 class FlickNote extends Triangle implements Note{
     protected int time;
     private final int sWidth;
@@ -345,7 +378,7 @@ class FlickNote extends Triangle implements Note{
         return time;
     }
 
-    public int judge(List<Input> points){
+    public int judge(List<Input> points, Pane pane){
         for(Input input : points) {
             double point = input.point;
             double height = input.height;
@@ -434,7 +467,7 @@ class HoldNote extends Quadrilateral implements Note, longNote {
     public double getTimeEnd() {
         return (int) (time + length);
     }
-    public int judge(List<Input> points){
+    public int judge(List<Input> points, Pane pane){
         for (Input input : points){
             double point = input.point;
             if (!isHit) {
@@ -450,7 +483,7 @@ class HoldNote extends Quadrilateral implements Note, longNote {
                     }
                 }
             } else {
-                return checkHeld(points);
+                return checkHeld(points, pane);
             }
         }
         return -1;
@@ -459,7 +492,7 @@ class HoldNote extends Quadrilateral implements Note, longNote {
         return pointHit;
     }
 
-    public int checkHeld(List<Input> points){
+    public int checkHeld(List<Input> points, Pane pane){
         for (Input input : points){
             double point = input.point;
             if(point <= midpoint + width / 2 + 0.5 && point >= midpoint - width / 2 - 0.5 && isHit){
@@ -484,6 +517,7 @@ class SlideNote implements Note, longNote{
     private final int time;
     private final int endTime;
     boolean held;
+    Pane ptr;
     ArrayList<SlideSegment> blocks = new ArrayList<>();
 
     SlideNote(int time1, int time2, double midpoint1, double midpoint2, double width, int sWidth, int sHeight, Pane pane){
@@ -491,6 +525,7 @@ class SlideNote implements Note, longNote{
         pane.getChildren().add(blocks.get(0).getBlock());
         time = time1;
         endTime = time2;
+        ptr = pane;
     }
     SlideNote(int time1, int time2, int time3, double midpoint1, double midpoint2, double midpoint3, double width, int sWidth, int sHeight, Pane pane){
         for (double i = 0; i < 1.0; i += 0.05){
@@ -504,6 +539,7 @@ class SlideNote implements Note, longNote{
         }
         time = time1;
         endTime = time3;
+        ptr = pane;
     }
 
     private double getValue(double p, double point1, double point2){
@@ -521,16 +557,17 @@ class SlideNote implements Note, longNote{
     public double getTimeEnd(){
         return endTime;
     }
-    public int judge(List<Input> points){
+    public int judge(List<Input> points, Pane pane){
         return -1;
     }
 
-    public int checkHeld(List<Input> points){
+    public int checkHeld(List<Input> points, Pane pane){
         if (blocks.size() == 0){
             return -1;
         }
         if (blocks.get(0).time == 0 || blocks.get(0).length == 0){
-            blocks.remove(0);
+            SlideSegment b =  blocks.remove(0);
+            ptr.getChildren().remove(b);
             return 1;
         }
         boolean tempHeld = blocks.get(0).checkHeld(points) >= 0;
@@ -551,6 +588,7 @@ class SlideNote implements Note, longNote{
     public double getPointHit(){
         return -1;
     }
+
 }
 
 class SlideSegment extends Quadrilateral{
@@ -626,13 +664,13 @@ class Input{
 }
 
 interface longNote{
-    int checkHeld(List<Input> point);
+    int checkHeld(List<Input> point, Pane pane);
 }
 interface Note {
     void reduceTime(long time);
     double getTimeStart();
     double getTimeEnd();
-    int judge(List<Input> point);
+    int judge(List<Input> point, Pane pane);
     double getPointHit();
 }
 
@@ -640,7 +678,7 @@ class Quadrilateral {
     double[] xPoints = {0, 0, 0, 0};
     double[] yPoints = {0, 0, 0, 0};
     final double hFactor = 1.1;
-    final int bottom = 100;
+    final int bottom = 80;
     Polygon block = new Polygon();
     Color color = Color.BLACK;
 
