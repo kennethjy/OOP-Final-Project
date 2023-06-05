@@ -1,4 +1,4 @@
-2000
+1600
 100
 
 1 tap 2
@@ -66,20 +66,27 @@
 9 tap 1
 10 tap 2
 11 tap 3
-12 bpm 75
+12 bpm 63
 0 hold 4 1
+1 bpm 60
+0 tap 2
+1 bpm 70
+0 tap 3
+1 bpm 153
+0 tap 2
+1.875 tap 1
+1.89 tap 2
+1.91 tap 3
+2 hold 4 1
+2 bpm 77.3
 1 tap 1
-2 tap 3
-3 tap 2
-3.7 tap 1
-3.8 tap 2
-3.9 tap 3
-4 hold 4 1
-5 tap 1
-6 tap 2
-7 tap 1
-8 tap 1
-8 bpm 98.36065
+1 bpm 78.4
+1 tap 2
+1 bpm 84.6
+1 tap 1
+1 bpm 89.5
+1 tap 1
+1 bpm 100
 0.5 tap 1
 1 tap 1
 1.5 tap 1
@@ -87,47 +94,55 @@
 2.5 tap 1
 3 tap 1
 3.5 tap 1
-4 tap 1
-4.5 tap 1
-5 tap 1
-5.5 tap 1
-6 tap 1
-6.5 tap 1
-7 tap 1
-7.5 tap 1
-8 tap 1
-8.5 tap 1
-9 tap 3
-9.5 tap 2
-10 tap 4
-10.5 bpm 128.7554
+4 bpm 110
+0 tap 1
+0.5 tap 1
+1 tap 1
+1.5 tap 1
+2 tap 1
+2.5 tap 1
+3 tap 1
+3.5 tap 1
+4 bpm 120
+0 tap 1
+0.5 tap 1
+1 tap 1
+1.5 tap 1
+2 tap 1
+2.5 tap 3
+3 tap 2
+3.5 tap 4
+4 bpm 128.7554
 0 tap 3
 0 tap 4
 1 tap 2
 1 tap 3
 2 tap 2
-2 bpm 140.8451
-0 hold 1 1
+2 bpm 145
+0 hold 1 2
 2 tap 4
 2.5 tap 4
 3 tap 4
 3.5 tap 4
-4 tap 4
-4.5 tap 2
-5 tap 3
-5.5 tap 1
-6 tap 1
-6.5 tap 1
-7 tap 1
-7.5 tap 1
-8 tap 1
-8.5 tap 3
-9 tap 2
-9.5 tap 4
-10 tap 4
-10.5 tap 4
-11 tap 4
-11.5 bpm 172.1664
+4 bpm 155
+0 tap 4
+0.5 tap 2
+1 tap 3
+1.5 tap 1
+2 tap 1
+2.5 tap 1
+3 tap 1
+3.5 tap 1
+4 bpm 165
+0 tap 1
+0.5 tap 3
+1 tap 2
+1.5 tap 4
+2 tap 4
+2.5 tap 4
+3 tap 4
+3.5 tap 4
+4 bpm 172.1664
 0 tap 4
 0 tap 3
 1 tap 2
@@ -135,7 +150,7 @@
 2 tap 1
 2 tap 2
 4 hold 1 1.7
-5.7 bpm 169.4915
+5 bpm 175
 0.8 tap 2
 0.9 tap 3
 1 tap 4
@@ -147,18 +162,616 @@
 3.5 tap 1
 4 flick 1
 4 tap 4
-4.5 tap 4
-5 tap 4
-5.5 tap 4
-6 flick 4
-6 tap 1
-6.5 tap 1
-7 tap 1
+4 bpm 185
+0.5 tap 4
+1 tap 4
+1.5 tap 4
+2 flick 4
+2 tap 1
+2.5 tap 1
+3 tap 1
+3.5 tap 1
+4 flick 1
+4 tap 2
+4.5 tap 1
+5 tap 1
+5.5 tap 2
+6 tap 3
+6.5 tap 4
+6 tap 3
+6 bpm 220
+1.5 tap 2
+2 tap 3
+2.5 tap 4
+2.5 bpm 223
+1 tap 1
+2 tap 2
+2 bpm 235
+2 bpm 237
+0 tap 1
+0.5 tap 2
+1 tap 3
+1.5 tap 4
+2 tap 1
+2.5 tap 2
+3 tap 3
+3.5 tap 4
+4 tap 4
+4.5 tap 3
+5 tap 2
+5.5 tap 1
+6 tap 4
+6.5 tap 3
+7 tap 2
 7.5 tap 1
-8 flick 1
 8 tap 1
+8.5 tap 2
+9 tap 4
+9.5 tap 3
+10 tap 1
+10.5 tap 2
+11 tap 4
+11.5 tap 3
+12 bpm 176.84
+0 slide 2 1 4 2 4
+2 bpm 310
+0 slide 4 0.5 3.5
+0 tap 1
+0.5 slide 3.5 1 4
+0.5 tap 1
+1 slide 4 1.5 3.5
+1 tap 1
+1.5 slide 3.5 2 4
+1.5 tap 1
+2 slide 4 2.5 3.5
+2 tap 1
+2.5 slide 3.5 3 4
+2.5 tap 1
+3 slide 4 3.5 3.5
+3 tap 1
+3.5 slide 3.5 4 4
+3.5 tap 1
+4 slide 4 4.5 3.5
+4 tap 1
+4.5 slide 3.5 5 4
+4.5 tap 1
+5 slide 4 5.5 3.5
+5 tap 1
+5.5 slide 3.5 6 4
+5.5 tap 1
+6 slide 4 6.5 3.5
+6 tap 1
+6.5 slide 3.5 7 4
+6.5 tap 1
+7 slide 4 7.5 3.5
+7 tap 1
+7.5 slide 3.5 8 4
+7.5 tap 1
+8 slide 4 8.5 3.5
+8 tap 1
+8.5 slide 3.5 9 4
 8.5 tap 1
+9 slide 4 9.5 3.5
 9 tap 1
-9.5 tap 2
+9.5 slide 3.5 10 4
+9.5 tap 1
+10 tap 1
+10.5 tap 3
+11 tap 2
+11.5 tap 4
+12 tap 3
+12 tap 4
+13 tap 2
+13 tap 3
+14 tap 1
+14 tap 2
+16 bpm 310
+0 slide 1 0.5 1.5
+0 tap 4
+0.5 slide 1.5 1 1
+0.5 tap 4
+1 slide 1 1.5 1.5
+1 tap 4
+1.5 slide 1.5 2 1
+1.5 tap 4
+2 slide 1 2.5 1.5
+2 tap 3
+2.5 slide 1.5 3 1
+2.5 tap 2
+3 slide 1 3.5 1.5
+3 tap 3
+3.5 slide 1.5 4 1
+3.5 tap 4
+4 slide 1 4.5 1.5
+4 tap 4
+4.5 slide 1.5 5 1
+4.5 tap 4
+5 slide 1 5.5 1.5
+5 tap 4
+5.5 slide 1.5 6 1
+5.5 tap 4
+6 slide 1 6.5 1.5
+6 tap 3
+6.5 slide 1.5 7 1
+6.5 tap 2
+7 slide 1 7.5 1.5
+7 tap 3
+7.5 slide 1.5 8 1
+7.5 tap 4
+8 slide 1 8.5 1.5
+8 tap 4
+8.5 slide 1.5 9 1
+8.5 tap 4
+9 slide 1 9.5 1.5
+9 tap 4
+9.5 slide 1.5 10 1
+9.5 tap 4
 10 tap 3
+10 tap 4
+11 tap 2
+11 tap 3
+12 tap 1
+12 tap 2
+12 slide 1 14 1
+14 slide 1 15 4 16 4
+16 bpm 310
+0 slide 4 0.5 3.5
+0 tap 1
+0.5 slide 3.5 1 4
+0.5 tap 1
+1 slide 4 1.5 3.5
+1 tap 1
+1.5 slide 3.5 2 4
+1.5 tap 1
+2 slide 4 2.5 3.5
+2 tap 1
+2.5 slide 3.5 3 4
+2.5 tap 1
+3 slide 4 3.5 3.5
+3 tap 1
+3.5 slide 3.5 4 4
+3.5 tap 1
+4 slide 4 4.5 3.5
+4 tap 1
+4.5 slide 3.5 5 4
+4.5 tap 1
+5 slide 4 5.5 3.5
+5 tap 1
+5.5 slide 3.5 6 4
+5.5 tap 1
+6 slide 4 6.5 3.5
+6 tap 1
+6.5 slide 3.5 7 4
+6.5 tap 1
+7 slide 4 7.5 3.5
+7 tap 1
+7.5 slide 3.5 8 4
+7.5 tap 1
+8 slide 4 8.5 3.5
+8 tap 1
+8.5 slide 3.5 9 4
+8.5 tap 1
+9 slide 4 9.5 3.5
+9 tap 1
+9.5 slide 3.5 10 4
+9.5 tap 1
+11 tap 2
+11.5 tap 4
+12 tap 3
+12 tap 4
+13 tap 2
+13 tap 3
+14 tap 1
+14 tap 2
+16 bpm 310
+0 tap 1
+0.5 tap 2
+1 tap 3
+1.5 tap 4
+2 tap 1
+2.5 tap 2
+3 tap 3
+3.5 tap 4
+4 tap 4
+4.5 tap 3
+5 tap 2
+5.5 tap 1
+6 tap 4
+6.5 tap 3
+7 tap 2
+7.5 tap 1
+8 tap 1
+8.5 tap 2
+9 tap 4
+9.5 tap 3
+10 tap 1
+10.5 tap 2
+11 tap 4
+11.5 tap 3
+12 tap 2
+14 tap 2
+14 tap 3
+16 bpm 310
+0 hold 4 1.5
+1.5 tap 2
+2 tap 3
+3 tap 2
+4 tap 1
+4 tap 2
+5 tap 2
+6 tap 3
+6 tap 4
+7 tap 3
+8 hold 2 1.5
+9.5 tap 3
+10 tap 4
+11 tap 3
+12 tap 2
+15 tap 1
+16 bpm 310
+0 hold 1 1.5
+1.5 tap 2
+2 tap 3
+3 tap 2
+4 tap 3
+4 tap 4
+5 tap 2
+6 tap 1
+6 tap 2
+7 tap 3
+8 tap 1
+9 tap 2
+10 tap 3
+11 tap 4
+12 hold 1 2
+12 tap 2
+13 tap 2
+14 hold 3 2
+14 tap 2
+15 tap 2
+16 bpm 310
+1.5 tap 2
+2 tap 3
+3 tap 2
+4 tap 1
+4 tap 2
+5 tap 2
+6 tap 3
+6 tap 4
+7 tap 3
+8 hold 2 1.5
+9.5 tap 3
+10 tap 4
+11 tap 3
+12 tap 2
+14 tap 3
+16 bpm 310
+1 tap 1
+3 tap 2
+4 tap 1
+4 tap 2
+5 tap 2
+5 tap 3
+6 tap 3
+6 tap 4
+7 tap 2
+7 tap 3
+8 tap 2
+11 tap 1
+11 tap 2
+11 tap 3
+11 tap 4
+12 tap 1
+12 tap 2
+12 tap 3
+12 tap 4
+16 bpm 324
+0 tap 1
+0 tap 2
+0.5 tap 3
+0.5 tap 4
+1 tap 1
+1 tap 2
+1.5 tap 3
+1.5 tap 4
+2 tap 1
+2 tap 2
+2.5 tap 3
+2.5 tap 4
+3 tap 1
+3 tap 2
+3.5 tap 3
+3.5 tap 4
+4 tap 1
+4 tap 2
+4.5 tap 3
+4.5 tap 4
+5 tap 1
+5 tap 2
+5 slide 1 5.5 2
+5.5 tap 3
+5.5 tap 4
+5.5 slide 4 6 3
+6 tap 1
+6 tap 2
+6 slide 1 6.5 2
+6.5 tap 3
+6.5 tap 4
+6.5 slide 4 7 3
+7 tap 1
+7 tap 2
+7 slide 1 7.5 2
+7.5 tap 3
+7.5 tap 4
+7.5 slide 4 8 3
+8 tap 1
+8 tap 2
+8.5 tap 3
+8.5 tap 4
+9 tap 1
+9 tap 2
+9.5 tap 3
+9.5 tap 4
+10 tap 1
+10 tap 2
+10.5 tap 3
 10.5 tap 4
+11 tap 1
+11 tap 2
+11.5 tap 2
+11.5 tap 3
+12 tap 1
+13 tap 2
+14 tap 3
+16 bpm 324
+0 tap 1
+0 tap 2
+0.5 tap 1
+0.5 tap 2
+1 tap 1
+1 tap 2
+1.5 tap 1
+1.5 tap 2
+2 tap 1
+2 tap 2
+2.5 tap 1
+2.5 tap 2
+3 tap 1
+3 tap 2
+3.5 tap 1
+3.5 tap 2
+4 tap 3
+4 tap 4
+4.5 tap 3
+4.5 tap 4
+5 tap 3
+5 tap 4
+5.5 tap 3
+5.5 tap 4
+6 tap 3
+6 tap 4
+6.5 tap 3
+6.5 tap 4
+7 tap 3
+7 tap 4
+7.5 tap 3
+7.5 tap 4
+8 tap 2
+8 tap 3
+8.5 tap 2
+8.5 tap 3
+9 tap 2
+9 tap 3
+9.5 tap 2
+9.5 tap 3
+10 tap 4
+11 tap 3
+12 tap 2
+14 tap 2
+14 tap 3
+16 bpm 324
+0 tap 1
+0 tap 2
+0.5 tap 3
+0.5 tap 4
+1 tap 1
+1 tap 2
+1.5 tap 3
+1.5 tap 4
+2 tap 1
+2 tap 2
+2.5 tap 3
+2.5 tap 4
+3 tap 1
+3 tap 2
+3.5 tap 3
+3.5 tap 4
+4 tap 1
+4 tap 2
+4.5 tap 3
+4.5 tap 4
+5 tap 1
+5 tap 2
+5 slide 1 5.5 2
+5.5 tap 3
+5.5 tap 4
+5.5 slide 4 6 3
+6 tap 1
+6 tap 2
+6 slide 1 6.5 2
+6.5 tap 3
+6.5 tap 4
+6.5 slide 4 7 3
+7 tap 1
+7 tap 2
+7 slide 1 7.5 2
+7.5 tap 3
+7.5 tap 4
+7.5 slide 4 8 3
+8 tap 1
+8 tap 2
+8.5 tap 3
+8.5 tap 4
+9 tap 1
+9 tap 2
+9.5 tap 3
+9.5 tap 4
+10 tap 1
+10 tap 2
+11 tap 1
+11 tap 2
+11.5 tap 2
+11.5 tap 3
+12 tap 1
+13 tap 2
+14 tap 3
+16 bpm 324
+0 tap 1
+0.5 tap 2
+1 tap 3
+1.5 tap 4
+2 tap 1
+2.5 tap 2
+3 tap 3
+3.5 tap 4
+4 tap 4
+4.5 tap 3
+5 tap 2
+5.5 tap 1
+6 tap 4
+6.5 tap 3
+7 tap 2
+7.5 tap 1
+8 tap 1
+8.5 tap 2
+9 tap 4
+9.5 tap 3
+10 tap 1
+10.5 tap 2
+11 tap 4
+11.5 tap 3
+12 tap 2
+14 slide 4 14.5 1 15 4
+15 slide 4 15.5 1 16 4
+16 bpm 324
+1 tap 1
+1 tap 2
+1 bpm 75
+1 tap 2
+1 bpm 80
+0.3 slide 2 0.7 2
+0.3 slide 3 0.5 2
+0.5 slide 2 0.6 4 0.7 2
+1 bpm 90
+0 tap 3
+0 tap 4
+1 bpm 100
+0 tap 3
+0.3 slide 3 0.4 2 0.5 3
+0.5 slide 3 0.6 2 0.7 3
+1 tap 1
+1 tap 2
+1 bpm 105
+1 tap 2
+1 bpm 110
+0.3 slide 2 0.7 2
+0.3 slide 3 0.5 2
+0.5 slide 2 0.6 4 0.7 2
+1 bpm 115
+0 tap 3
+0 tap 4
+1 bpm 120
+0 tap 3
+0.3 slide 3 0.4 2 0.5 3
+0.5 slide 3 0.6 2 0.7 3
+1 tap 1
+1 tap 2
+1 bpm 130
+1 tap 2
+1 bpm 135
+0.3 slide 2 0.7 2
+0.3 slide 3 0.5 2
+0.5 slide 2 0.6 4 0.7 2
+1 bpm 135
+0 tap 3
+0 tap 4
+1 bpm 143
+0 tap 3
+0.3 slide 3 0.4 2 0.5 3
+0.5 slide 3 0.6 2 0.7 3
+1 tap 1
+1 tap 2
+1 bpm 154
+1 tap 2
+1 bpm 165
+0.3 slide 2 0.7 2
+0.3 slide 3 0.5 2
+0.5 slide 2 0.6 4 0.7 2
+1 bpm 174
+0 tap 3
+0 tap 4
+1 bpm 186
+0 tap 3
+0.3 slide 3 0.4 2 0.5 3
+0.5 slide 3 0.6 2 0.7 3
+1 tap 1
+1 tap 2
+1 bpm 197
+1 tap 2
+1 bpm 209
+0.3 slide 2 0.7 2
+0.3 slide 3 0.5 2
+0.5 slide 2 0.6 4 0.7 2
+1 bpm 216
+0 tap 3
+0 tap 4
+1 bpm 240
+0 tap 3
+0.3 slide 3 0.4 2 0.5 3
+0.5 slide 3 0.6 2 0.7 3
+1 tap 1
+1 tap 2
+1 bpm 253
+1 tap 2
+1 bpm 267
+0.3 slide 2 0.7 2
+0.3 slide 3 0.5 2
+0.5 slide 2 0.6 4 0.7 2
+1 bpm 277
+0 tap 3
+0 tap 4
+1 bpm 278
+0 tap 3
+0.3 slide 3 0.4 2 0.5 3
+0.5 slide 3 0.6 2 0.7 3
+1 tap 1
+1 tap 2
+1 bpm 291
+1 tap 2
+1 bpm 292
+0.3 slide 2 0.7 2
+0.3 slide 3 0.5 2
+0.5 slide 2 0.6 4 0.7 2
+1 bpm 326
+0 tap 3
+0 tap 4
+1 bpm 327
+0 tap 3
+0.3 slide 3 0.4 2 0.5 3
+0.5 slide 3 0.6 2 0.7 3
+1 tap 1
+1 tap 2
+1 bpm 326
+1 tap 2
+1 bpm 327
+0.3 slide 2 0.7 2
+0.3 slide 3 0.5 2
+0.5 slide 2 0.6 4 0.7 2
+1 bpm 333
+0 tap 3
+0 tap 4
+1 bpm 334
+0 tap 3
+0.3 slide 3 0.4 2 0.5 3
+0.5 slide 3 0.6 2 0.7 3
+1 bpm 334.5
