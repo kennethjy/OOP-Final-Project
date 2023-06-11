@@ -65,43 +65,60 @@ public class HelloApplication extends Application {
 
             @Override
             public void handle(long currentTime) {
+                // play song
                 player.setAutoPlay(true);
+                // getting time between this frame and previous frame
                 long deltaTime = System.currentTimeMillis() - prevTime;
                 prevTime = System.currentTimeMillis();
+
+                // checking keys tapped on this frame
                 List<Input> list = new ArrayList<>();
                 for (String key : keyDownThisFrame) {
                     if (keyInputs.containsKey(key)) {
                         list.add(keyInputs.get(key));
                     }
                 }
+
+                // checking keys held down
                 List<Input> kDownList = new ArrayList<>();
                 for (String key : keydownKeys) {
                     if (keyInputs.containsKey(key)) {
                         kDownList.add(keyInputs.get(key));
                     }
                 }
-                // Call reduceTime for each object in the list
+
+                // reduce time for each note in the list
                 for (int i = 0; i < Notes.toArray().length; i++) {
                     Note note = Notes.get(i);
                     note.reduceTime(deltaTime);
+
+                    // watch until the end of the demo for E
                     if (note.getTimeStart() <= -50 && note.getClass().getName().equals("com.example.demo.E") && !container.getChildren().contains(iView)){
                         container.getChildren().add(iView);
                     }
+
+                    // check if notes are hit
                     if (note.getTimeStart() < 80){
                         if(note.judge(list, container) > 0){
                             list.remove(note.getPointHit());
+                            // E
                             if (note.getClass().getName().equals("com.example.demo.E") && !container.getChildren().contains(iView)){
                                 container.getChildren().add(iView);
                             }
                         }
                     }
+
+                    // auto remove notes after it reaches 0
                     if (note.getTimeEnd() < -100){
                         Notes.remove(note);
                         longs.remove(note);
+                        note.remove();
                         i++;
                         container.getChildren().remove(note);
                     }
                 }
+
+                // check note held down each turn
                 for (int i = 0; i < longs.toArray().length; i++){
                     longNote note = longs.get(i);
                     note.checkHeld(kDownList, container);
@@ -114,6 +131,7 @@ public class HelloApplication extends Application {
     }
 
     private List<Note> readTapNotesFromFile(Pane pane) throws IOException {
+        // parsing each line into a note object and adding it into a list
         List<Note> tapNotes = new ArrayList<>();
         File file = new File("data.txt");
         Scanner chart = new Scanner(file);
@@ -222,7 +240,7 @@ public class HelloApplication extends Application {
         keyInputs.put("COMMA", new Input(4, 0));
         keyInputs.put("PERIOD", new Input(4.5, 0));
 
-        // Add more keys and their respective inputs as needed
+        // Table to check which key corresponds to what input object
     }
 
     private void handleKeyPress(String key) {
@@ -230,10 +248,12 @@ public class HelloApplication extends Application {
             keyDownThisFrame.add(key);
             keydownKeys.add(key);
         }
+        // Check keydown events
     }
 
     private void handleKeyRelease(String key) {
         keydownKeys.remove(key);
+        // remove key from list storing held down keys
     }
 }
 
@@ -316,6 +336,9 @@ class TapNote extends Quadrilateral implements Note{
     public double getPointHit(){
         return pointHit;
     }
+    public void remove() {
+        reduceTime(10000);
+    }
 
 }
 
@@ -324,7 +347,7 @@ class E extends TapNote{
         super(time, midpoint, width, sWidth, sHeight);
     }
 }
-class FlickNote extends Triangle implements Note{
+class FlickNote extends Pentagon implements Note{
     protected int time;
     private final int sWidth;
     private final int sHeight;
@@ -412,6 +435,9 @@ class FlickNote extends Triangle implements Note{
     @Override
     public double getPointHit() {
         return pointHit;
+    }
+    public void remove() {
+        reduceTime(10000);
     }
 
 }
@@ -511,6 +537,9 @@ class HoldNote extends Quadrilateral implements Note, longNote {
         }
         return 0;
     }
+    public void remove() {
+        reduceTime(10000);
+    }
 }
 
 class SlideNote implements Note, longNote{
@@ -519,10 +548,19 @@ class SlideNote implements Note, longNote{
     boolean held;
     Pane ptr;
     ArrayList<SlideSegment> blocks = new ArrayList<>();
+    ArrayList<SlideSegment> toUpdate = new ArrayList<>();
 
     SlideNote(int time1, int time2, double midpoint1, double midpoint2, double width, int sWidth, int sHeight, Pane pane){
-        blocks.add(new SlideSegment(time1, midpoint2, midpoint1, time2 - time1, width, sWidth, sHeight));
-        pane.getChildren().add(blocks.get(0).getBlock());
+        for (double i = 0; i < 1.0; i += 0.05){
+            double t1 = getValue(i, time1, time2);
+            double t2 = getValue(i + 0.05, time1, time2);
+            double mid1 = getValue(i, midpoint1, midpoint2);
+            double mid2 = getValue(i + 0.05, midpoint1, midpoint2);
+            SlideSegment block = new SlideSegment(t1, mid2, mid1, t2 - t1, width, sWidth, sHeight);
+            blocks.add(block);
+            toUpdate.add(block);
+            pane.getChildren().add(block.getBlock());
+        }
         time = time1;
         endTime = time2;
         ptr = pane;
@@ -535,6 +573,7 @@ class SlideNote implements Note, longNote{
             double mid2 = getValue(i + 0.05, getValue(i + 0.05, midpoint1, midpoint2), getValue(i + 0.05, midpoint2, midpoint3));
             SlideSegment block = new SlideSegment(t1, mid2, mid1, t2 - t1, width, sWidth, sHeight);
             blocks.add(block);
+            toUpdate.add(block);
             pane.getChildren().add(block.getBlock());
         }
         time = time1;
@@ -546,7 +585,7 @@ class SlideNote implements Note, longNote{
         return point1 + p * (point2 - point1);
     }
     public void reduceTime(long time){
-        for (SlideSegment block : blocks){
+        for (SlideSegment block : toUpdate){
             block.reduceTime(time);
             block.updateBlock();
         }
@@ -562,23 +601,23 @@ class SlideNote implements Note, longNote{
     }
 
     public int checkHeld(List<Input> points, Pane pane){
-        if (blocks.size() == 0){
+        if (toUpdate.size() == 0){
             return -1;
         }
-        if (blocks.get(0).time == 0 || blocks.get(0).length == 0){
-            SlideSegment b =  blocks.remove(0);
-            ptr.getChildren().remove(b);
+        if (toUpdate.get(0).time == 0 || toUpdate.get(0).length == 0){
+            SlideSegment b =  toUpdate.remove(0);
+            b.reduceTime(10000);
             return 1;
         }
-        boolean tempHeld = blocks.get(0).checkHeld(points) >= 0;
+        boolean tempHeld = toUpdate.get(0).checkHeld(points) >= 0;
         if (tempHeld != held) {
             held = tempHeld;
             if (held) {
-                for (SlideSegment segment : blocks) {
+                for (SlideSegment segment : toUpdate) {
                     segment.setColor(Color.BLACK);
                 }
             } else {
-                for (SlideSegment segment : blocks) {
+                for (SlideSegment segment : toUpdate) {
                     segment.setColor(Color.GRAY);
                 }
             }
@@ -589,6 +628,12 @@ class SlideNote implements Note, longNote{
         return -1;
     }
 
+    @Override
+    public void remove() {
+        for (SlideSegment block: blocks){
+            block.setColor(Color.TRANSPARENT);
+        }
+    }
 }
 
 class SlideSegment extends Quadrilateral{
@@ -672,6 +717,7 @@ interface Note {
     double getTimeEnd();
     int judge(List<Input> point, Pane pane);
     double getPointHit();
+    void remove();
 }
 
 class Quadrilateral {
@@ -682,9 +728,18 @@ class Quadrilateral {
     Polygon block = new Polygon();
     Color color = Color.BLACK;
 
+    /* Basically, this code is to draw a given rectangle using several parameters with a 3d perspective.
+    The code simulates 1-point perspective
+    the basic idea is the formula gets the percentage value of the point from the top to the bottom.
+     */
+
     public void initBlock(double time, double midpointTop, double midpointBottom, double width, double height, int sWidth, int sHeight) {
         height = min(height, 800 - time);
         int vanishX = (int) round(sWidth * 0.5);
+        /* the formula of a point (x,y) on a plane with dimensions 4,1000 is
+        ((1000 - y) / 1000)^2 * (x * screen width/4 - x vanishing point) + x vanishing point,
+        bottom line + y vanishing point + ((1000 - y) / 1000)^2 * (screen height - y vanishing point)))
+        the ^2 is there so the animation looks smoother. */
         double percentTop = (1000 - time - height * (1 + (1 - time / 800.0) * (hFactor - 1))) / 1000.0;
         xPoints[0] = pow(percentTop, 2) * ((midpointTop - 0.5 + (width / 2.0)) * sWidth / 4 - vanishX) + vanishX;
         xPoints[1] = pow((1000 - time) / 1000.0, 2) * ((midpointBottom - 0.5 + (width / 2.0)) * sWidth / 4 - vanishX) + vanishX;
@@ -697,25 +752,26 @@ class Quadrilateral {
         yPoints[2] = yPoints[1];
         yPoints[3] = yPoints[0];
 
+        // setting the points into the polygon
         block.getPoints().addAll(
                 xPoints[0], yPoints[0],
                 xPoints[1], yPoints[1],
                 xPoints[2], yPoints[2],
                 xPoints[3], yPoints[3]
         );
-        if (time < 800) {
-            block.setFill(color);
-        }
 
     }
 
     public void updateBlock(double time, double midpointTop, double midpointBottom, double width, double height, int sWidth, int sHeight) {
+        // only display when time to the line is 580 ms instead of 1000 ms to simulate horizon line
         if (time > 580 || time + height < 0) {
             block.setFill(Color.TRANSPARENT);
             return;
         }
         block.setFill(color);
-        height = min(min(height, 580 - time), 580);
+        double tempHeight = min(min(height, 580 - time), 580);
+        midpointTop = tempHeight / height * (midpointTop - midpointBottom) + midpointBottom;
+        height = tempHeight;
 
         int vanishX = (int) round(sWidth * 0.5);
         double percentTop = (1000 - time - height * (1 + (1 - time / 800.0) * (hFactor - 1))) / 1000.0;
@@ -746,7 +802,7 @@ class Quadrilateral {
     }
 }
 
-class Triangle extends Quadrilateral{
+class Pentagon extends Quadrilateral{
     double[] xPoints = {0, 0, 0, 0, 0};
     double[] yPoints = {0, 0, 0, 0, 0};
     final double hFactor = 1.1;
