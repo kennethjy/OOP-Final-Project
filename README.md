@@ -21,4 +21,24 @@ Basically, a percentage between the top of the screen and the bottom of the scre
 The data structure I used to store the notes is ArrayList. The program goes through each note in the list and animates it depending on the time from the previous frame. This allows the game to run at the maximum FPS that the computer can handle.
 
 ## Screenshots
+Tap notes
+![Screenshot (47)](https://github.com/kennethjy/OOP-Final-Project/assets/114073455/4f75e7a1-d20d-4462-89a2-1ff918571dd1)
 
+
+Flick notes
+![Screenshot (53)](https://github.com/kennethjy/OOP-Final-Project/assets/114073455/13dbee81-a825-4d48-a237-9e7220c773c8)
+
+
+
+
+Slide notes
+
+![image](https://github.com/kennethjy/OOP-Final-Project/assets/114073455/f7c9d55f-7e78-48b1-bd5c-02e059a001c8)
+
+
+Slide note art
+![Screenshot (50)](https://github.com/kennethjy/OOP-Final-Project/assets/114073455/c33ff4dd-6321-4681-ae64-27c58f3051f3)
+
+
+More elaborate slide note art
+![Screenshot (51)](https://github.com/kennethjy/OOP-Final-Project/assets/114073455/7689e04d-04d1-4e52-9ea3-1124163fbcc8)
