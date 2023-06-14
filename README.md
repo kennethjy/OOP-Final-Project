@@ -1,5 +1,6 @@
 # OOP-Final-Project
 
+https://docs.google.com/document/d/1Lq5xAMnbneHD_p5Vue_3cChw2PJgumJzOmvqWz6OmkE/edit?usp=drivesdk
 ## Brief Description
 The program I made is a rhythm game with 4 types of notes: tap notes, hold notes, flick notes, and slide notes. Tap notes and hold notes appear in 4 lanes. There are also slide notes, which have to be caught, but there is no need to click the keys, the keys just need to be held down. Flick notes are the same as tap notes, except you have to also slide your finger upwards to a higher key at the same lane.
 The keys corresponding to each lane is the entire keyboard, with the Z key being the first lane and the period key being the last lane. The keys above have their corresponding lanes and heights.
